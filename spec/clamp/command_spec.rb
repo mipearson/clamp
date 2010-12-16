@@ -22,7 +22,7 @@ describe Clamp::Command do
   describe "#help" do
 
     it "describes usage" do
-      @command.help.should include("Usage:\n    cmd\n")
+      @command.help.should include("Usage: cmd\n")
     end
 
   end
@@ -440,7 +440,7 @@ describe Clamp::Command do
         Punt is an example command.  It doesn't do much, really.
         
         The prefix at the beginning of this description should be normalised
-        to two spaces.
+        to flush left.
       EOF
       
     end
@@ -448,8 +448,8 @@ describe Clamp::Command do
     describe "#help" do
 
       it "includes the description" do
-        @command.help.should =~ /^  Punt is an example command/
-        @command.help.should =~ /^  The prefix/
+        @command.help.should =~ /^Punt is an example command/
+        @command.help.should =~ /^The prefix/
       end
 
     end

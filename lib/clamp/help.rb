@@ -3,6 +3,8 @@ require 'stringio'
 module Clamp
 
   module Help
+    
+    LEFT_COLUMN_WIDTH = 20
 
     def usage(usage)
       @declared_usage_descriptions ||= []
@@ -34,15 +36,15 @@ module Clamp
 
     def help(invocation_path)
       help = StringIO.new
-      help.puts "Usage:"
       usage_descriptions.each_with_index do |usage, i|
-        help.puts "    #{invocation_path} #{usage}".rstrip
+        help.print i == 0 ? "Usage: " : "       "
+        help.puts "#{invocation_path} #{usage}".rstrip
       end
       if description
         help.puts ""
-        help.puts description.gsub(/^/, "  ")
+        help.puts description
       end
-      detail_format = "    %-29s %s"
+      detail_format = "  %-#{LEFT_COLUMN_WIDTH}s %s"
       if has_parameters?
         help.puts "\nParameters:"
         parameters.each do |parameter|
